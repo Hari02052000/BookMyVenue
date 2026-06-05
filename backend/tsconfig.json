@@ -4,6 +4,7 @@
     "target": "ES2022",
     "lib": ["ES2022"],
     "module": "CommonJS",
+    "types": ["node"],
     "moduleResolution": "node",
     /* Project Structure */
     "rootDir": "./src",
