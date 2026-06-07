@@ -1,3 +1,5 @@
+import { ValidationError } from "@src/shared/errors";
+
 export abstract class Base{
     createdAt:Date
     updatedAt:Date
@@ -10,7 +12,7 @@ export abstract class Base{
   }
   protected static validate(value: string,name: string): void {
   if (!value || value.trim().length === 0) {
-    throw new Error(`${name} is required`);
+    throw new ValidationError(`${name} is required`);
   }
 }
 

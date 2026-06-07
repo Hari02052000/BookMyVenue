@@ -2,6 +2,7 @@ import { Email, PhoneNumber, Coordinates } from "./value-objects";
 import { UserRole, UserStatus } from "./enums";
 import { UserPropsType } from "./types";
 import { Base } from "./Base";
+import { ValidationError,UnauthorizedError } from "@src/shared/errors";
 
 export class User extends Base {
   private constructor(private props: UserPropsType) {
@@ -59,7 +60,7 @@ export class User extends Base {
   }
   verifyEmail(): void {
     if (this.props.emailVerified) {
-      throw new Error("Email already verified");
+      throw new ValidationError("Email already verified");
     }
 
     this.props.emailVerified = true;
@@ -68,11 +69,11 @@ export class User extends Base {
 
   verifyPhone(): void {
     if (!this.props.phoneNumber) {
-      throw new Error("Phone number not found");
+      throw new ValidationError("Phone number not found");
     }
 
     if (this.props.phoneVerified) {
-      throw new Error("Phone already verified");
+      throw new ValidationError("Phone already verified");
     }
 
     this.props.phoneVerified = true;
@@ -126,7 +127,7 @@ export class User extends Base {
 
   suspend(): void {
     if (this.props.status !== UserStatus.ACTIVE) {
-      throw new Error("Only active users can be suspended");
+      throw new UnauthorizedError("Only active users can be suspended");
     }
 
     this.props.status = UserStatus.SUSPENDED;
@@ -135,7 +136,7 @@ export class User extends Base {
 
   reactivate(): void {
     if (this.props.status !== UserStatus.SUSPENDED) {
-      throw new Error("User is not suspended");
+      throw new UnauthorizedError("User is not suspended");
     }
 
     this.props.status = UserStatus.ACTIVE;
