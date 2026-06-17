@@ -58,6 +58,15 @@ export class User extends Base {
   get status(): UserStatus {
     return this.props.status;
   }
+
+  get passwordHash(): string {
+    return this.props.passwordHash;
+  }
+
+  get salt(): string {
+    return this.props.salt;
+  }
+
   verifyEmail(): void {
     if (this.props.emailVerified) {
       throw new ValidationError("Email already verified");

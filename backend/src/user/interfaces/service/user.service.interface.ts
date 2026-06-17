@@ -12,7 +12,7 @@ import {
 } from "@src/user/dto";
 
 export interface UserServiceInterface {
-  createUser(input: CreateUserDto): Promise<UserResponseDto>;
+  createUser(input: CreateUserDto): Promise<AuthResponseDto>;
   authenticateUser(credentials: LoginUserDto): Promise<AuthResponseDto>;
   refresh(refreshToken: string): Promise<AuthResponseDto>;
   getUserById(id: string): Promise<UserResponseDto | null>;
