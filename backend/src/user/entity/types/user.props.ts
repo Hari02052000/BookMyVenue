@@ -16,3 +16,14 @@ export type UserPropsType = {
   coordinates?: Coordinates;
   profilePhoto?: string;
 }
+
+export type UserPersistenceCoordinates = {
+  type: "Point";
+  coordinates: [number, number];
+};
+
+export type UserPersistenceProps = Omit<UserPropsType, "email" | "phoneNumber" | "coordinates"> & {
+  email: string;
+  phoneNumber?: string;
+  coordinates?: UserPersistenceCoordinates;
+};
